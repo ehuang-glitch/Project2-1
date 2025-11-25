@@ -10,11 +10,11 @@ import androidx.room.PrimaryKey;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class CanvasClone {
 
 
-    @Entity(tableName = "CanvasClone")
-    public class GymLog {
+
+    @Entity(tableName = "CanvasCloneTable")
+    public class CanvasClone {
         @PrimaryKey(autoGenerate = true)
         private int id;
         private String assignment;
@@ -35,7 +35,7 @@ public class CanvasClone {
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
-        public GymLog(String exercise, int weight, int reps, int userID) {
+        public CanvasClone(String exercise, int weight, int reps, int userID) {
             this.assignment = exercise;
             this.maxGrade = weight;
             this.grade = reps;
@@ -46,8 +46,8 @@ public class CanvasClone {
         @Override
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) return false;
-            GymLog gymLog = (GymLog) o;
-            return id == gymLog.id && Double.compare(maxGrade, gymLog.maxGrade) == 0 && grade == gymLog.grade && userID == gymLog.userID && Objects.equals(assignment, gymLog.assignment) && Objects.equals(date, gymLog.date);
+            CanvasClone canvasClone = (CanvasClone) o;
+            return id == canvasClone.id && Double.compare(maxGrade, canvasClone.maxGrade) == 0 && grade == canvasClone.grade && userID == canvasClone.userID && Objects.equals(assignment, canvasClone.assignment) && Objects.equals(date, canvasClone.date);
         }
 
         @Override
@@ -104,4 +104,4 @@ public class CanvasClone {
         }
     }
 
-}
+
