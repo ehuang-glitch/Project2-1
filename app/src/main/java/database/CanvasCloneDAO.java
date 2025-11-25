@@ -15,8 +15,11 @@ public interface CanvasCloneDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(CanvasClone gymlog);
+
     @Query("SELECT * FROM " + CanvasCloneDatabase.GYM_LOG_TABLE + " ORDER BY date DESC")
-    List<CanvasClone> getAllRecords();
+     List<CanvasClone> getAllRecords();
+
+
 
 
     @Query("SELECT * FROM " + CanvasCloneDatabase.GYM_LOG_TABLE +" WHERE userID = :userID ORDER BY date DESC")

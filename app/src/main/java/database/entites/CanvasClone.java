@@ -35,10 +35,10 @@ import java.util.Objects;
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
-        public CanvasClone(String exercise, int weight, int reps, int userID) {
-            this.assignment = exercise;
-            this.maxGrade = weight;
-            this.grade = reps;
+        public CanvasClone(String assignment, int maxGrade, int grade, int userID) {
+            this.assignment = assignment;
+            this.maxGrade = maxGrade;
+            this.grade = grade;
             date = LocalDateTime.now();
             this.userID = userID;
         }
