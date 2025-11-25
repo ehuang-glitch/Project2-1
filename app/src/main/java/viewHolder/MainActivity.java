@@ -1,4 +1,4 @@
-package com.example.canvasclone_3;
+package viewHolder;
 
 import android.os.Bundle;
 
@@ -8,7 +8,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.canvasclone_3.R;
+
 public class MainActivity extends AppCompatActivity {
+
+
+    public static final String tag = "CCLOG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

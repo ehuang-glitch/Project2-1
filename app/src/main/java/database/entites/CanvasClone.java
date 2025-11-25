@@ -1,6 +1,9 @@
 package database.entites;
 
+import android.os.Build;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -10,13 +13,13 @@ import java.util.Objects;
 public class CanvasClone {
 
 
-    @Entity(tableName = "gymLogTable")
+    @Entity(tableName = "CanvasClone")
     public class GymLog {
         @PrimaryKey(autoGenerate = true)
         private int id;
-        private String exercise;
-        private double weight;
-        private int reps;
+        private String assignment;
+        private int maxGrade;
+        private int grade;
         private LocalDateTime date;
 
         private int userID;
@@ -24,17 +27,18 @@ public class CanvasClone {
         @NonNull
         @Override
         public String toString() {
-            return exercise + '\n' +
-                    ", weight= " + weight + '\n' +
-                    ", reps= " + reps + '\n' +
+            return assignment + '\n' +
+                    ", weight= " + maxGrade + '\n' +
+                    ", reps= " + grade + '\n' +
                     ", date= " + date.toString() + '\n' +
                     '}';
         }
 
-        public GymLog(String exercise, double weight, int reps, int userID) {
-            this.exercise = exercise;
-            this.weight = weight;
-            this.reps = reps;
+        @RequiresApi(api = Build.VERSION_CODES.O)
+        public GymLog(String exercise, int weight, int reps, int userID) {
+            this.assignment = exercise;
+            this.maxGrade = weight;
+            this.grade = reps;
             date = LocalDateTime.now();
             this.userID = userID;
         }
@@ -43,12 +47,12 @@ public class CanvasClone {
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) return false;
             GymLog gymLog = (GymLog) o;
-            return id == gymLog.id && Double.compare(weight, gymLog.weight) == 0 && reps == gymLog.reps && userID == gymLog.userID && Objects.equals(exercise, gymLog.exercise) && Objects.equals(date, gymLog.date);
+            return id == gymLog.id && Double.compare(maxGrade, gymLog.maxGrade) == 0 && grade == gymLog.grade && userID == gymLog.userID && Objects.equals(assignment, gymLog.assignment) && Objects.equals(date, gymLog.date);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hash(id, exercise, weight, reps, date, userID);
+            return Objects.hash(id, assignment, maxGrade, grade, date, userID);
         }
 
         public int getId() {
@@ -59,28 +63,28 @@ public class CanvasClone {
             this.id = id;
         }
 
-        public String getExercise() {
-            return exercise;
+        public String getAssignment() {
+            return assignment;
         }
 
-        public void setExercise(String exercise) {
-            this.exercise = exercise;
+        public void setAssignment(String assignment) {
+            this.assignment = assignment;
         }
 
-        public double getWeight() {
-            return weight;
+        public int getMaxGrade() {
+            return maxGrade;
         }
 
-        public void setWeight(double weight) {
-            this.weight = weight;
+        public void setMaxGrade(int maxGrade) {
+            this.maxGrade = maxGrade;
         }
 
-        public int getReps() {
-            return reps;
+        public int getGrade() {
+            return grade;
         }
 
-        public void setReps(int reps) {
-            this.reps = reps;
+        public void setGrade(int grade) {
+            this.grade = grade;
         }
 
         public LocalDateTime getDate() {
