@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">CanvasClone_3</string>
+    <string name="login">Login</string>
+    <string name="enter_username">Enter Username</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
