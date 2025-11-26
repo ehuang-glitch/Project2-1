@@ -20,32 +20,37 @@ public class AdminCourseAdapter extends RecyclerView.Adapter<AdminCourseAdapter.
     }
 
     private List<Course> list = new ArrayList<>();
-    private OnCourseClickListener listener;
+    private final OnCourseClickListener listener;
 
     public AdminCourseAdapter(OnCourseClickListener listener) {
         this.listener = listener;
     }
 
-    public void set(List<Course> l) {
+    public void set(List<Course> courses) {
         list.clear();
-        if (l != null) list.addAll(l);
+        if (courses != null)
+            list.addAll(courses);
         notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new VH(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_admin_course, parent, false));
+        View v = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_admin_course, parent, false);
+        return new VH(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VH h, int i) {
-        Course c = list.get(i);
-        h.code.setText(c.getCode());
-        h.name.setText(c.getName());
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        Course c = list.get(position);
 
-        h.itemView.setOnClickListener(v -> listener.onCourseClick(c));
+        holder.code.setText(c.getCode());
+        holder.name.setText(c.getName());
+        holder.userId.setText("User: " + c.getUserId());
+        holder.percentage.setText(c.getPercentage() + "%");
+
+        holder.itemView.setOnClickListener(v -> listener.onCourseClick(c));
     }
 
     @Override
@@ -54,11 +59,15 @@ public class AdminCourseAdapter extends RecyclerView.Adapter<AdminCourseAdapter.
     }
 
     static class VH extends RecyclerView.ViewHolder {
-        TextView code, name;
+
+        TextView code, name, userId, percentage;
+
         VH(View v) {
             super(v);
             code = v.findViewById(R.id.tvAdminCourseCode);
             name = v.findViewById(R.id.tvAdminCourseName);
+            userId = v.findViewById(R.id.tvAdminCourseUserId);
+            percentage = v.findViewById(R.id.tvAdminCoursePercentage);
         }
     }
 }

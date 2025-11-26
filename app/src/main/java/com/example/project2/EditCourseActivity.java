@@ -13,12 +13,11 @@ import com.example.project2.database.entities.Course;
 public class EditCourseActivity extends AppCompatActivity {
 
     EditText etCode, etName, etScore, etAssignments, etUserId;
-    CourseDao dao;
-    int id;
+    int courseId;
 
     @Override
-    protected void onCreate(Bundle b) {
-        super.onCreate(b);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_course);
 
         etCode = findViewById(R.id.etCode);
@@ -26,28 +25,28 @@ public class EditCourseActivity extends AppCompatActivity {
         etScore = findViewById(R.id.etScore);
         etAssignments = findViewById(R.id.etAssignments);
         etUserId = findViewById(R.id.etUserId);
+
         Button btnSave = findViewById(R.id.btnSaveCourse);
 
-        dao = AppDatabase.get(getApplicationContext()).courseDao();
-
-        id = getIntent().getIntExtra("id", -1);
+        courseId = getIntent().getIntExtra("id", -1);
         etCode.setText(getIntent().getStringExtra("code"));
         etName.setText(getIntent().getStringExtra("name"));
         etScore.setText(String.valueOf(getIntent().getIntExtra("percentage", 0)));
         etAssignments.setText(getIntent().getStringExtra("assignments"));
         etUserId.setText(String.valueOf(getIntent().getIntExtra("userId", 1)));
 
-        btnSave.setOnClickListener(v -> {
+        CourseDao dao = AppDatabase.get(getApplicationContext()).courseDao();
 
+        btnSave.setOnClickListener(v -> {
             Course c = new Course(
-                    etCode.getText().toString(),
-                    etName.getText().toString(),
-                    Integer.parseInt(etScore.getText().toString()),
-                    etAssignments.getText().toString(),
-                    Integer.parseInt(etUserId.getText().toString())
+                    etCode.getText().toString().trim(),
+                    etName.getText().toString().trim(),
+                    Integer.parseInt(etScore.getText().toString().trim()),
+                    etAssignments.getText().toString().trim(),
+                    Integer.parseInt(etUserId.getText().toString().trim())
             );
 
-            c.setId(id);
+            c.setId(courseId);
 
             AppDatabase.exec.execute(() -> {
                 dao.insert(c);

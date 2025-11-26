@@ -2,7 +2,7 @@ package com.example.project2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,27 +16,34 @@ import java.util.List;
 
 public class AdminDashboardActivity extends AppCompatActivity implements AdminCourseAdapter.OnCourseClickListener {
 
-    RecyclerView rv;
     AdminCourseAdapter adapter;
-    CourseDao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_dashboard);
 
-        rv = findViewById(R.id.rvAdminCourses);
+        RecyclerView rv = findViewById(R.id.rvAdminCourses);
         rv.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdminCourseAdapter(this);
         rv.setAdapter(adapter);
 
-        Button btnAdd = findViewById(R.id.btnAddCourseHeader);
+        // Add Course button (in header)
+        TextView btnAddCourse = findViewById(R.id.btnAddCourseHeader);
+        btnAddCourse.setOnClickListener(v ->
+                startActivity(new Intent(this, AddCourseActivity.class)));
 
-        btnAdd.setOnClickListener(v ->
-                startActivity(new Intent(this, AddCourseActivity.class))
-        );
+        loadCourses();
+    }
 
-        dao = AppDatabase.get(getApplicationContext()).courseDao();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadCourses();
+    }
+
+    private void loadCourses() {
+        CourseDao dao = AppDatabase.get(this).courseDao();
 
         AppDatabase.exec.execute(() -> {
             List<Course> list = dao.getAllCourses();

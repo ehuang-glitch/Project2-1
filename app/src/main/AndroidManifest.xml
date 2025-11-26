@@ -3,30 +3,44 @@
     package="com.example.project2">
 
     <application
-        android:theme="@style/Theme.Project2"
         android:allowBackup="true"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Project2">
 
+        <!-- LOGIN is now the launcher -->
         <activity
-            android:name=".EditCourseActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".AddCourseActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".AdminDashboardActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".LandingPageActivity"
+            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Register Screen -->
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false"/>
+
+        <!-- Admin Dashboard -->
+        <activity
+            android:name=".AdminDashboardActivity"
+            android:exported="false"/>
+
+        <!-- Add Course (Admin Only) -->
+        <activity
+            android:name=".AddCourseActivity"
+            android:exported="false"/>
+
+        <!-- Edit Course (Admin Only) -->
+        <activity
+            android:name=".EditCourseActivity"
+            android:exported="false"/>
+
+        <!-- USER dashboard -->
+        <activity
+            android:name=".LandingPageActivity"
+            android:exported="false"/>
 
     </application>
 

@@ -13,10 +13,8 @@ public class User {
     private String password;
     private boolean isAdmin;
 
-    // ✅ Required by Room
     public User() {}
 
-    // Optional convenience constructor for your code
     public User(String username, String password) {
         this.username = username;
         this.password = password;

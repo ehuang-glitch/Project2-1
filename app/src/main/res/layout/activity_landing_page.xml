@@ -13,48 +13,64 @@
         android:orientation="vertical"
         android:background="#FAFAFA">
 
+        <!-- HEADER -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:background="#FFFFFF"
             android:elevation="4dp">
+
+            <!-- DASHBOARD TITLE -->
             <TextView
+                android:id="@+id/tvDashboardTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dashboard"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#333"/>
+                android:textColor="#333" />
+
+            <!-- USERNAME TEXT -->
+
+            <!-- LOGOUT BUTTON -->
+
             <TextView
                 android:id="@+id/tvUserMenu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="username"
-                android:textSize="16sp"
-                android:textColor="#007AFF"
-                android:padding="8dp"
+                android:layout_marginEnd="116dp"
                 android:background="?attr/selectableItemBackground"
+                android:padding="6dp"
+                android:text="username"
+                android:textColor="#007AFF"
+                android:textSize="16sp"
                 tools:text="testuser1" />
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Logout"
+                android:textSize="14sp"
+                android:backgroundTint="#FF5252"
+                android:textColor="#FFFFFF"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:layout_centerVertical="true" />
+
         </RelativeLayout>
 
+        <!-- BODY -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <Button
-                android:id="@+id/btnAdmin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Admin Dashboard"
-                android:backgroundTint="#FF5722"
-                android:visibility="gone"
-                tools:visibility="visible"
-                android:layout_marginBottom="24dp"/>
-
+            <!-- MY COURSES TITLE -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,12 +79,14 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="12dp"/>
 
+            <!-- USER COURSES LIST -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCourses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:nestedScrollingEnabled="false"
                 tools:listitem="@layout/item_course_card"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
