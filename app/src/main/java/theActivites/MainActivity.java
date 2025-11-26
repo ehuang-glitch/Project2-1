@@ -1,5 +1,7 @@
-package viewHolder;
+package theActivites;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -15,6 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String tag = "CCLOG";
 
+    private static final String MAIN_ACTIVITY_USER_ID = "com.example.CanvasClone_3.MAIN_ACTIVITY_USER_ID";
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +33,12 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    static Intent mainActivityIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
+        return intent;
+
     }
 }

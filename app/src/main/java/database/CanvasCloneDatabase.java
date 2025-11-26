@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 import database.entites.CanvasClone;
 import database.entites.User;
 import database.typeConverter.LocalDateTypeConverter;
-import viewHolder.MainActivity;
+import theActivites.MainActivity;
 
 @TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {CanvasClone.class, User.class}, version = 1 , exportSchema = false)

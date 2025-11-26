@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 
 import database.entites.CanvasClone;
 import database.entites.User;
-import viewHolder.MainActivity;
+import theActivites.MainActivity;
 
 public class CanvasCloneRepository {
 
