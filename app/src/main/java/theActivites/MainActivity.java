@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -41,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
 
     private User user;
     private CanvasCloneRepository repository;
+
+    Button b1;
 
 
     @Override
@@ -84,6 +88,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         repository = CanvasCloneRepository.getReposoitory(getApplication());
         loginUser(savedInstanceState);
+
+
+
 
 
         //User not logged in at this point
@@ -133,7 +140,15 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+            if(user.isAdmin()){
+                System.out.println("works");
+                b1 = (Button) findViewById(R.id.adminButton);
+                b1.setVisibility(View.VISIBLE);
+            }
+
+
         });
+
 
     }
 
