@@ -1,23 +1,33 @@
+
 package com.example.project2.database.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import com.example.project2.database.CourseDatabase;
 
-@Entity(tableName = CourseDatabase.COURSE_TABLE)
+@Entity(tableName="courses")
 public class Course {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey(autoGenerate=true)
     private int id;
-    private String courseCode;
-    private String courseName;
-    private String grade; // e.g. "95%"
-    private int userId; // Foreign Key to link course to a user
+    private String code;
+    private String name;
+    private int percentage;
+    private String assignments;
+    private int userId;
 
-    public Course(String courseCode, String courseName, String grade, int userId) {
-        this.courseCode = courseCode;
-        this.courseName = courseName;
-        this.grade = grade;
-        this.userId = userId;
+    public Course(String code,String name,int percentage,String assignments,int userId){
+        this.code=code; this.name=name; this.percentage=percentage;
+        this.assignments=assignments; this.userId=userId;
     }
-    // ... Add getters and setters
+    public int getId(){return id;}
+    public void setId(int id){this.id=id;}
+    public String getCode(){return code;}
+    public void setCode(String c){this.code=c;}
+    public String getName(){return name;}
+    public void setName(String n){this.name=n;}
+    public int getPercentage(){return percentage;}
+    public void setPercentage(int p){this.percentage=p;}
+    public String getAssignments(){return assignments;}
+    public void setAssignments(String a){this.assignments=a;}
+    public int getUserId(){return userId;}
+    public void setUserId(int u){this.userId=u;}
 }

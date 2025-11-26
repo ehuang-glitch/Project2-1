@@ -1,35 +1,15 @@
-package com.example.project2.database.DAO;
 
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
+package com.example.project2.database.dao;
 
-import com.example.project2.database.entities.User; // Ensure this import matches your User file location
-
+import androidx.room.*;
+import com.example.project2.database.entities.User;
 import java.util.List;
 
 @Dao
-public interface UserDAO {
+public interface UserDao {
+    @Insert(onConflict=OnConflictStrategy.REPLACE)
+    void insert(User... u);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(User... user);
-
-    @Delete
-    void delete(User user);
-
-    @Query("SELECT * FROM " + CourseDatabase.USER_TABLE + " ORDER BY username")
-    List<User> getAllUsers();
-
-    @Query("DELETE FROM " + CourseDatabase.USER_TABLE)
-    void deleteAll();
-
-    // Added for Login functionality: Fetch a user by username to check password
-    @Query("SELECT * FROM " + CourseDatabase.USER_TABLE + " WHERE username = :username")
-    User getUserByUsername(String username);
-
-    // Added for Dashboard functionality: Fetch the currently logged-in user
-    @Query("SELECT * FROM " + CourseDatabase.USER_TABLE + " WHERE id = :id")
-    User getUserById(int id);
+    @Query("SELECT * FROM users ORDER BY username ASC")
+    List<User> getAll();
 }

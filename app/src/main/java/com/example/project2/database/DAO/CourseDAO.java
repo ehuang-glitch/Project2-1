@@ -1,25 +1,18 @@
-package com.example.project2.database.DAO;
 
-import androidx.room.Dao;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
+package com.example.project2.database.dao;
 
-import com.example.project2.Course; // Ensure this points to where you created Course.java
-
+import androidx.room.*;
+import com.example.project2.database.entities.Course;
 import java.util.List;
 
 @Dao
-public interface CourseDAO {
+public interface CourseDao {
+    @Insert(onConflict=OnConflictStrategy.REPLACE)
+    void insert(Course... c);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(Course course);
+    @Query("SELECT * FROM courses WHERE userId=:u ORDER BY name ASC")
+    List<Course> getByUser(int u);
 
-    // Selects all courses belonging to a specific user
-    @Query("SELECT * FROM " + CourseDatabase.COURSE_TABLE + " WHERE userId = :userId ORDER BY courseName ASC")
-    List<Course> getCoursesByUserId(int userId);
-
-    // Optional: Select all courses regardless of user (good for debugging)
-    @Query("SELECT * FROM " + CourseDatabase.COURSE_TABLE)
-    List<Course> getAllCourses();
+    @Query("SELECT COUNT(*) FROM courses")
+    int count();
 }

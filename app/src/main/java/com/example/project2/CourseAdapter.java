@@ -1,65 +1,49 @@
+
 package com.example.project2;
 
-import static androidx.collection.ScatterMapKt.get;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
+import android.view.*;
+import android.widget.*;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import com.example.project2.database.entities.Course;
+import com.example.project2.R;
+import java.util.*;
 
-import java.util.List;
+public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.VH>{
+    List<Course> list = new ArrayList<>();
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseViewHolder> {
-
-    public List<Course> courseList;
-
-    public CourseAdapter(List<Course> courseList) {
-        this.courseList = courseList;
+    public void set(List<Course> l){
+        list.clear();
+        if(l!=null) list.addAll(l);
+        notifyDataSetChanged();
     }
 
     @NonNull
-    @Override
-    public CourseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflate your custom layout "item_course_card"
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_course_card, parent, false);
-        return new CourseViewHolder(view);
+    public VH onCreateViewHolder(@NonNull ViewGroup p,int v){
+        return new VH(LayoutInflater.from(p.getContext()).inflate(R.layout.item_course_card,p,false));
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull CourseViewHolder holder, int position) {
-        Course course = courseList.get(position);
-
-        // Bind data to the views defined in item_course_card.xml
-        holder.tvCourseCode.setText(course.getCourseCode());
-        holder.tvCourseName.setText(course.getCourseName());
-        holder.tvCourseGrade.setText(course.getGradeString());
-        holder.progressBarGrade.setProgress(course.getGradeProgress());
-        holder.tvAssignmentsList.setText(course.getAssignments());
+    public void onBindViewHolder(@NonNull VH h,int i){
+        Course c=list.get(i);
+        h.code.setText(c.getCode());
+        h.name.setText(c.getName());
+        h.grade.setText(c.getPercentage()+"%");
+        h.pb.setProgress(c.getPercentage());
+        h.assign.setText(c.getAssignments());
     }
 
-    @Override
-    public int getItemCount() {
-        return courseList.size();
-    }
+    public int getItemCount(){return list.size();}
 
-    // ViewHolder class to hold references to your UI elements
-    public static class CourseViewHolder extends RecyclerView.ViewHolder {
-        TextView tvCourseCode, tvCourseName, tvCourseGrade, tvAssignmentsList;
-        ProgressBar progressBarGrade;
-
-        public CourseViewHolder(@NonNull View itemView) {
-            super(itemView);
-            // Match these IDs with item_course_card.xml
-            tvCourseCode = itemView.findViewById(R.id.tvCourseCode);
-            tvCourseName = itemView.findViewById(R.id.tvCourseName);
-            tvCourseGrade = itemView.findViewById(R.id.tvCourseGrade);
-            progressBarGrade = itemView.findViewById(R.id.progressBarGrade);
-            tvAssignmentsList = itemView.findViewById(R.id.tvAssignmentsList);
+    static class VH extends RecyclerView.ViewHolder{
+        TextView code,name,grade,assign;
+        ProgressBar pb;
+        VH(View v){
+            super(v);
+            code=v.findViewById(R.id.tvCourseCode);
+            name=v.findViewById(R.id.tvCourseName);
+            grade=v.findViewById(R.id.tvCourseGrade);
+            pb=v.findViewById(R.id.progressBarGrade);
+            assign=v.findViewById(R.id.tvAssignmentsList);
         }
     }
 }
