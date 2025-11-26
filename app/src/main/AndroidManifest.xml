@@ -10,9 +10,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Project2">
+        android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar">
         <activity
-            android:name=".MainActivity"
+            android:name="theActivites.loginActivity"
+            android:exported="false" />
+        <activity
+            android:name="theActivites.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

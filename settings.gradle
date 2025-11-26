@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Project 2"
+rootProject.name = "CanvasClone_3"
 include ':app'
