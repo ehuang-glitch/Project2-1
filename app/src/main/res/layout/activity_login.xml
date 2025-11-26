@@ -53,7 +53,7 @@
         android:autofillHints="Please enter Password"
         android:gravity="center"
         android:textSize="24sp"
-        android:inputType="text"
+        android:inputType="textPassword"
 
         tools:ignore="TextFields" />
 

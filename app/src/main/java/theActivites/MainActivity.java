@@ -1,11 +1,18 @@
 package theActivites;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -34,6 +41,35 @@ public class MainActivity extends AppCompatActivity {
 
     private User user;
     private CanvasCloneRepository repository;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu,menu);
+        return true;
+    }
+
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item = menu.findItem(R.id.logoutMenuItem);
+        item.setVisible(true);
+        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+               // Toast.makeText(MainActivity.this,"LOGOUT TO BE IMPLEMENTED", Toast.LENGTH_SHORT).show();
+
+                showLogoutDialog();
+
+                return false;
+            }
+        });
+
+        item.setTitle(user != null ? user.getUsername() : "Account");
+        return true;
+    }
+
+
+
 
 
 
@@ -98,6 +134,27 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+
+    }
+
+    private void showLogoutDialog(){
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.setTitle("Logout?");
+        alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                logout();
+            }
+        });
+        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                alertDialog.dismiss();
+            }
+        });
+        alertBuilder.create().show();
 
     }
 
