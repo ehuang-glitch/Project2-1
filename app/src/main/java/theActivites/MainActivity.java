@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            if(user.isAdmin()){
+            if(user.isAdmin() == true){
                 System.out.println("works");
                 b1 = (Button) findViewById(R.id.adminButton);
                 b1.setVisibility(View.VISIBLE);
