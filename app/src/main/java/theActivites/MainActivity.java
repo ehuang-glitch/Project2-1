@@ -46,6 +46,18 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         EdgeToEdge.enable(this);
         setContentView(binding.getRoot());
+        repository = CanvasCloneRepository.getReposoitory(getApplication());
+        loginUser(savedInstanceState);
+
+
+        //User not logged in at this point
+        if(loggedInUserID == LOGGED_OUT){
+            Intent intent = loginActivity.loginIntentFactory(this);
+            startActivity(intent);
+
+        }
+
+        updateSharedPreference();
 
 
     }
