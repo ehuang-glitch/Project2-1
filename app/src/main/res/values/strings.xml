@@ -4,4 +4,6 @@
     <string name="enter_username">Enter Username</string>
     <string name="enter_password">Enter Password</string>
     <string name="sign_up">Sign Up</string>
+    <string name="preference_file_key">CanvasClone_3PreferenceFileNameCanvasClone</string>
+    <string name="preference_user_ID_key">CanvasClone_3PreferenceUserIDCanvasClone</string>
 </resources>
