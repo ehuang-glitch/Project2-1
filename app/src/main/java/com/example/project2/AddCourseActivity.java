@@ -19,12 +19,18 @@ public class AddCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course);
 
+        // BACK BUTTON
+        Button btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(v -> finish());
+
+        // FORM FIELDS
         etCode = findViewById(R.id.etCode);
         etName = findViewById(R.id.etName);
         etScore = findViewById(R.id.etScore);
         etAssignments = findViewById(R.id.etAssignments);
         etUserId = findViewById(R.id.etUserId);
 
+        // ADD BUTTON
         Button btnAdd = findViewById(R.id.btnAddCourse);
 
         CourseDao dao = AppDatabase.get(getApplicationContext()).courseDao();
