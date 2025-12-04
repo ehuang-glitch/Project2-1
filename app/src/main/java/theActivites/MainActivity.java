@@ -21,8 +21,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
 
-//import com.example.canvasclone_3.R;
 import com.example.canvasclone_3.R;
+
 import com.example.canvasclone_3.databinding.ActivityMainBinding;
 
 import database.CanvasCloneRepository;
