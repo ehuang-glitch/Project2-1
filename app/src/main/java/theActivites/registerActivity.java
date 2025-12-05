@@ -29,31 +29,39 @@ public class registerActivity extends AppCompatActivity {
         super.onCreate(b);
         setContentView(R.layout.activity_register);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
-
-        etUser = findViewById(R.id.etRegUsername);
-        etPass = findViewById(R.id.etRegPassword);
-        String username = binding.etRegUsername.getText().toString();
-        String password = binding.etRegPassword.getText().toString();
-
-        if (username.isEmpty() || password.isEmpty()) {
-            Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Button btnSignup = findViewById(R.id.btnRegister);
-
+        setContentView(binding.getRoot());
         UserDAO dao = CanvasCloneDatabase.getDatabase(getApplicationContext()).userDao();
 
-        btnSignup.setOnClickListener(v -> {
-            User newUser = new User(
-                    etUser.getText().toString().trim(),
-                    etPass.getText().toString().trim()
-            );
-            newUser.setAdmin(false);
 
-            dao.insert(newUser);
+        binding.btnRegister.setOnClickListener(v -> {
+            String username = binding.etRegUsername.getText().toString().trim();
+            String password = binding.etRegPassword.getText().toString().trim();
 
-            Toast.makeText(this, "Registered!", Toast.LENGTH_SHORT).show();
-            finish();
+            if (username.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Fields cannot be empty", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+
+
+
+
+
+
+
+            CanvasCloneDatabase.databaseWriteExecutor.execute(() -> {
+                User newUser = new User(username, password);
+                newUser.setAdmin(false);
+
+
+
+                dao.insert(newUser);
+
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Registered!", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
+            });
         });
     }
 
@@ -63,3 +71,4 @@ public class registerActivity extends AppCompatActivity {
 
     }
 }
+
