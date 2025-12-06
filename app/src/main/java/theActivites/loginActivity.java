@@ -39,6 +39,12 @@ public class loginActivity extends AppCompatActivity {
                 verifyUser();
             }
         });
+
+        binding.SignUpButton.setOnClickListener(v -> {
+            Intent intent = registerActivity.registerIntentFactory(loginActivity.this);
+
+            startActivity(intent);
+        });
     }
 
 

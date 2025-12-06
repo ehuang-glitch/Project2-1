@@ -30,8 +30,8 @@ public abstract class CanvasCloneDatabase extends RoomDatabase {
     private static volatile CanvasCloneDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
 
-    static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-    static CanvasCloneDatabase getDatabase(final Context context){
+    public static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    public static CanvasCloneDatabase getDatabase(final Context context){
         if(INSTANCE == null){
             synchronized (CanvasCloneDatabase.class){
                 if(INSTANCE == null) {
