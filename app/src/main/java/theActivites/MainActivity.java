@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,12 +21,19 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.canvasclone_3.R;
 
 import com.example.canvasclone_3.databinding.ActivityMainBinding;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import database.CanvasCloneRepository;
+import database.entites.CanvasClone;
 import database.entites.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
 
     private User user;
     private CanvasCloneRepository repository;
+
+    private CourseAdapter adapter;
 
     Button b1;
 
@@ -101,6 +111,32 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        //RecyclerView rv = findViewById(R.id.rvCourses);
+        binding.rvCourses.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new CourseAdapter();
+        binding.rvCourses.setAdapter(adapter);
+
+        //TODO:Delete below after done testing
+
+        /*
+         List<CanvasClone> fakeList = new ArrayList<>();
+        CanvasClone fake = new CanvasClone("Read", 70, 85, 100);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            fake = new CanvasClone("Read", 70, 85, 100);
+        }
+        fakeList.add(fake);
+        adapter.set(fakeList);
+         */
+
+
+
+
+
+        //TODO:Uncomment below after done testing
+      repository.updateSharedPreferenceLiveData(loggedInUserID).observe(this, courses -> {
+           adapter.set(courses);
+        });
+
         updateSharedPreference();
 
 
@@ -141,11 +177,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
-            if(user.isAdmin() == true){
-                System.out.println("works");
-                b1 = (Button) findViewById(R.id.adminButton);
-                b1.setVisibility(View.VISIBLE);
-            }
+           // if(user.isAdmin() == true){
+                //System.out.println("works");
+               // b1 = (Button) findViewById(R.id.adminButton);
+               // b1.setVisibility(View.VISIBLE);
+          //  }
 
 
         });

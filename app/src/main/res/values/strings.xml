@@ -17,4 +17,9 @@
     <string name="create_username">Create Username</string>
     <string name="create_password">Create Password</string>
     <string name="register">Register</string>
+    <string name="upcoming_assignments">Upcoming Assignments:</string>
+    <string name="username">username</string>
+    <string name="my_courses">My Courses</string>
+    <string name="logout">Logout</string>
+    <string name="dashboard">Dashboard</string>
 </resources>
