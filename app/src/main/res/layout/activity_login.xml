@@ -13,7 +13,7 @@
         android:id="@+id/titleLoginTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Welcome to Canvas Clone"
+        android:text="Welcome to ClassCore"
         android:textSize="26sp"
         android:textStyle="bold"
         android:gravity="center"
