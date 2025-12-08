@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityGradeAssignmentBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.AssignmentSubmissionDao;
@@ -32,6 +34,8 @@ public class GradeAssignmentActivity extends AppCompatActivity implements Submis
         super.onCreate(savedInstanceState);
         binding = ActivityGradeAssignmentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         assignmentId = getIntent().getIntExtra("assignmentId", -1);
         assignmentTitle = getIntent().getStringExtra("assignmentTitle");

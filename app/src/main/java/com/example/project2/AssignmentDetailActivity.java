@@ -5,6 +5,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityAssignmentDetailBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.AssignmentDao;
@@ -28,6 +30,8 @@ public class AssignmentDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAssignmentDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         assignmentId = getIntent().getIntExtra("assignmentId", -1);
         userId = getIntent().getIntExtra("userId", -1);

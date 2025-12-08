@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityManageAssignmentsBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.AssignmentDao;
@@ -28,6 +30,8 @@ public class ManageAssignmentsActivity extends AppCompatActivity implements Assi
         super.onCreate(savedInstanceState);
         binding = ActivityManageAssignmentsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         // Get course info
         courseId = getIntent().getIntExtra("courseId", -1);

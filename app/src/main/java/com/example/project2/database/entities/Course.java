@@ -1,6 +1,7 @@
 package com.example.project2.database.entities;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "courses")
@@ -14,6 +15,7 @@ public class Course {
 
     public Course() {}
 
+    @Ignore
     public Course(String code, String name) {
         this.code = code;
         this.name = name;

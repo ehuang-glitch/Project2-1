@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityCourseDetailBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.AssignmentDao;
@@ -29,6 +31,8 @@ public class CourseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCourseDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         courseId = getIntent().getIntExtra("courseId", -1);
         userId = getIntent().getIntExtra("userId", -1);

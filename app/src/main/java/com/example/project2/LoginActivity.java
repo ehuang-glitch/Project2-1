@@ -6,6 +6,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityLoginBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.UserDao;
@@ -20,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Handle edge-to-edge display
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         UserDao dao = AppDatabase.get(getApplicationContext()).userDao();
 

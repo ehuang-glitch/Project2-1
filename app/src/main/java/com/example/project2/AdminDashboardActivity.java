@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityAdminDashboardBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.CourseDao;
@@ -23,6 +25,8 @@ public class AdminDashboardActivity extends AppCompatActivity implements AdminCo
         super.onCreate(savedInstanceState);
         binding = ActivityAdminDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         binding.rvAdminCourses.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdminCourseAdapter(this);

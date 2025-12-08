@@ -7,6 +7,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityAddCourseBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.CourseDao;
@@ -30,6 +32,8 @@ public class AddCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddCourseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         // BACK BUTTON
         binding.btnBack.setOnClickListener(v -> finish());

@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityAssignmentFormBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.AssignmentDao;
@@ -40,6 +42,8 @@ public class AssignmentFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAssignmentFormBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         courseId = getIntent().getIntExtra("courseId", -1);
         assignmentId = getIntent().getIntExtra("assignmentId", -1);

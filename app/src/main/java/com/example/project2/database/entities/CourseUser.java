@@ -2,6 +2,7 @@ package com.example.project2.database.entities;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -37,6 +38,7 @@ public class CourseUser {
 
     public CourseUser() {}
 
+    @Ignore
     public CourseUser(int courseId, int userId) {
         this.courseId = courseId;
         this.userId = userId;

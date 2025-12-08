@@ -8,6 +8,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.project2.util.EdgeToEdgeHelper;
+
 import com.example.project2.databinding.ActivityEditCourseBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.CourseDao;
@@ -33,6 +35,8 @@ public class EditCourseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditCourseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        EdgeToEdgeHelper.applyInsets(binding.getRoot());
 
         courseId = getIntent().getIntExtra("id", -1);
         courseName = getIntent().getStringExtra("name");
