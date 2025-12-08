@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace 'com.example.project2'
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.example.project2"
         minSdk 24
-        targetSdk 34
+        targetSdk 35
 
         versionCode 1
         versionName "1.0"
@@ -18,9 +18,9 @@ android {
     }
 
     compileOptions {
-        // Required by AGP 8+
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        // JDK 24 support
+        sourceCompatibility JavaVersion.VERSION_24
+        targetCompatibility JavaVersion.VERSION_24
     }
 
     buildFeatures {
