@@ -13,6 +13,8 @@ android {
 
         versionCode 1
         versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     compileOptions {
@@ -23,6 +25,12 @@ android {
 
     buildFeatures {
         viewBinding true
+    }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
     }
 }
 
@@ -39,4 +47,15 @@ dependencies {
     def room = "2.6.1"
     implementation "androidx.room:room-runtime:$room"
     annotationProcessor "androidx.room:room-compiler:$room"
+
+    // JUnit 5 for unit tests
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+
+    // Mockito for mocking
+    testImplementation 'org.mockito:mockito-core:5.5.0'
+
+    // Android instrumented tests
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
