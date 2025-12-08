@@ -1,54 +1,104 @@
 package com.example.project2;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.project2.databinding.ActivityAddCourseBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.CourseDao;
+import com.example.project2.database.dao.CourseUserDao;
+import com.example.project2.database.dao.UserDao;
 import com.example.project2.database.entities.Course;
+import com.example.project2.database.entities.CourseUser;
+import com.example.project2.database.entities.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddCourseActivity extends AppCompatActivity {
 
-    EditText etCode, etName, etScore, etAssignments, etUserId;
+    private ActivityAddCourseBinding binding;
+    private StudentCheckboxAdapter studentAdapter;
+    private List<StudentCheckboxAdapter.StudentCheckItem> studentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_course);
+        binding = ActivityAddCourseBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // BACK BUTTON
-        Button btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(v -> finish());
+        binding.btnBack.setOnClickListener(v -> finish());
 
-        // FORM FIELDS
-        etCode = findViewById(R.id.etCode);
-        etName = findViewById(R.id.etName);
-        etScore = findViewById(R.id.etScore);
-        etAssignments = findViewById(R.id.etAssignments);
-        etUserId = findViewById(R.id.etUserId);
+        // Setup student selection RecyclerView
+        binding.rvSelectedStudents.setLayoutManager(new LinearLayoutManager(this));
+        studentAdapter = new StudentCheckboxAdapter();
+        binding.rvSelectedStudents.setAdapter(studentAdapter);
+        studentList = new ArrayList<>();
+
+        // Load available students
+        loadStudents();
+
+        // Open student selection dialog
+        binding.btnSelectStudents.setOnClickListener(v -> showStudentDialog());
 
         // ADD BUTTON
-        Button btnAdd = findViewById(R.id.btnAddCourse);
+        CourseDao courseDao = AppDatabase.get(getApplicationContext()).courseDao();
+        CourseUserDao courseUserDao = AppDatabase.get(getApplicationContext()).courseUserDao();
 
-        CourseDao dao = AppDatabase.get(getApplicationContext()).courseDao();
+        binding.btnAddCourse.setOnClickListener(v -> {
+            String code = binding.etCode.getText().toString().trim();
+            String name = binding.etName.getText().toString().trim();
 
-        btnAdd.setOnClickListener(v -> {
+            if (code.isEmpty() || name.isEmpty()) {
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            Course c = new Course(
-                    etCode.getText().toString().trim(),
-                    etName.getText().toString().trim(),
-                    Integer.parseInt(etScore.getText().toString().trim()),
-                    etAssignments.getText().toString().trim(),
-                    Integer.parseInt(etUserId.getText().toString().trim())
-            );
+            Course c = new Course(code, name);
 
             AppDatabase.exec.execute(() -> {
-                dao.insert(c);
-                finish();
+                long courseId = courseDao.insert(c);
+
+                // Enroll selected students
+                List<Integer> selectedUserIds = studentAdapter.getSelectedUserIds();
+                for (int userId : selectedUserIds) {
+                    courseUserDao.insert(new CourseUser((int)courseId, userId));
+                }
+
+                runOnUiThread(() -> {
+                    Toast.makeText(AddCourseActivity.this, "Course added!", Toast.LENGTH_SHORT).show();
+                    finish();
+                });
             });
         });
+    }
+
+    private void loadStudents() {
+        UserDao userDao = AppDatabase.get(this).userDao();
+
+        AppDatabase.exec.execute(() -> {
+            List<User> users = userDao.getAll();
+            studentList.clear();
+
+            for (User user : users) {
+                if (!user.isAdmin()) {
+                    studentList.add(new StudentCheckboxAdapter.StudentCheckItem(user, false));
+                }
+            }
+
+            runOnUiThread(() -> studentAdapter.set(studentList));
+        });
+    }
+
+    private void showStudentDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select Students");
+        builder.setNegativeButton("Close", (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 }

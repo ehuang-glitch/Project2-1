@@ -40,37 +40,58 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp" />
 
-            <EditText
-                android:id="@+id/etScore"
-                android:hint="Percentage"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
-
-            <EditText
-                android:id="@+id/etAssignments"
-                android:hint="Assignments"
-                android:minHeight="100dp"
-                android:gravity="top"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
-
-            <EditText
-                android:id="@+id/etUserId"
-                android:hint="User ID"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp" />
-
-            <Button
-                android:id="@+id/btnSaveCourse"
-                android:text="Save Changes"
-                android:layout_marginTop="20dp"
+            <TextView
+                android:text="Select Students"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btnSelectStudents"
+                android:text="Choose Students"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSelectedStudents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:spacing="8dp">
+
+                <Button
+                    android:id="@+id/btnManageAssignments"
+                    android:text="Manage Assignments"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FF9800" />
+
+                <Button
+                    android:id="@+id/btnSaveCourse"
+                    android:text="Save"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:id="@+id/btnDeleteCourse"
+                    android:text="Delete"
+                    android:backgroundTint="#D32F2F"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

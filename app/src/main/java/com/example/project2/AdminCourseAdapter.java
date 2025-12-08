@@ -47,8 +47,6 @@ public class AdminCourseAdapter extends RecyclerView.Adapter<AdminCourseAdapter.
 
         holder.code.setText(c.getCode());
         holder.name.setText(c.getName());
-        holder.userId.setText("User: " + c.getUserId());
-        holder.percentage.setText(c.getPercentage() + "%");
 
         holder.itemView.setOnClickListener(v -> listener.onCourseClick(c));
     }
@@ -59,15 +57,12 @@ public class AdminCourseAdapter extends RecyclerView.Adapter<AdminCourseAdapter.
     }
 
     static class VH extends RecyclerView.ViewHolder {
-
-        TextView code, name, userId, percentage;
+        TextView code, name;
 
         VH(View v) {
             super(v);
             code = v.findViewById(R.id.tvAdminCourseCode);
             name = v.findViewById(R.id.tvAdminCourseName);
-            userId = v.findViewById(R.id.tvAdminCourseUserId);
-            percentage = v.findViewById(R.id.tvAdminCoursePercentage);
         }
     }
 }

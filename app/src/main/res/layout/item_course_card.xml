@@ -16,29 +16,14 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tvCourseCode"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/tvCourseCode"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                tools:text="CS 101"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#000000"/>
-            <TextView
-                android:id="@+id/tvCourseGrade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="92%"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#4CAF50"/>
-        </LinearLayout>
+            tools:text="CS 101"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
 
         <TextView
             android:id="@+id/tvCourseName"
@@ -47,40 +32,17 @@
             tools:text="Intro to Computer Science"
             android:textSize="14sp"
             android:textColor="#757575"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="12dp"/>
 
         <ProgressBar
             android:id="@+id/progressBarGrade"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
+            android:layout_height="6dp"
             android:max="100"
-            android:progress="92"
-            android:layout_marginBottom="16dp"/>
+            android:progress="0"
+            android:progressDrawable="@android:drawable/progress_horizontal" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#EEEEEE"
-            android:layout_marginBottom="12dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upcoming Assignments:"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:textColor="#9E9E9E"
-            android:layout_marginBottom="8dp"/>
-
-        <TextView
-            android:id="@+id/tvAssignmentsList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="• Lab 1\n• Quiz 2"
-            android:textSize="14sp"
-            android:textColor="#424242"
-            android:lineSpacingExtra="4dp"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -2,12 +2,11 @@ package com.example.project2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project2.databinding.ActivityAdminDashboardBinding;
 import com.example.project2.database.AppDatabase;
 import com.example.project2.database.dao.CourseDao;
 import com.example.project2.database.entities.Course;
@@ -16,22 +15,25 @@ import java.util.List;
 
 public class AdminDashboardActivity extends AppCompatActivity implements AdminCourseAdapter.OnCourseClickListener {
 
-    AdminCourseAdapter adapter;
+    private ActivityAdminDashboardBinding binding;
+    private AdminCourseAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin_dashboard);
+        binding = ActivityAdminDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        RecyclerView rv = findViewById(R.id.rvAdminCourses);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        binding.rvAdminCourses.setLayoutManager(new LinearLayoutManager(this));
         adapter = new AdminCourseAdapter(this);
-        rv.setAdapter(adapter);
+        binding.rvAdminCourses.setAdapter(adapter);
 
         // Add Course button (in header)
-        TextView btnAddCourse = findViewById(R.id.btnAddCourseHeader);
-        btnAddCourse.setOnClickListener(v ->
+        binding.btnAddCourseHeader.setOnClickListener(v ->
                 startActivity(new Intent(this, AddCourseActivity.class)));
+
+        // Logout button
+        binding.btnLogout.setOnClickListener(v -> logout());
 
         loadCourses();
     }
@@ -57,9 +59,13 @@ public class AdminDashboardActivity extends AppCompatActivity implements AdminCo
         i.putExtra("id", c.getId());
         i.putExtra("code", c.getCode());
         i.putExtra("name", c.getName());
-        i.putExtra("percentage", c.getPercentage());
-        i.putExtra("assignments", c.getAssignments());
-        i.putExtra("userId", c.getUserId());
         startActivity(i);
+    }
+
+    private void logout() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

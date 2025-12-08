@@ -4,6 +4,7 @@
 
     <application
         android:allowBackup="true"
+        android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project2">
 
@@ -40,6 +41,31 @@
         <!-- USER dashboard -->
         <activity
             android:name=".LandingPageActivity"
+            android:exported="false"/>
+
+        <!-- Course Detail (Student View) -->
+        <activity
+            android:name=".CourseDetailActivity"
+            android:exported="false"/>
+
+        <!-- Assignment Detail (Student View) -->
+        <activity
+            android:name=".AssignmentDetailActivity"
+            android:exported="false"/>
+
+        <!-- Manage Assignments (Admin) -->
+        <activity
+            android:name=".ManageAssignmentsActivity"
+            android:exported="false"/>
+
+        <!-- Assignment Form (Admin - Add/Edit) -->
+        <activity
+            android:name=".AssignmentFormActivity"
+            android:exported="false"/>
+
+        <!-- Grade Assignment (Admin) -->
+        <activity
+            android:name=".GradeAssignmentActivity"
             android:exported="false"/>
 
     </application>

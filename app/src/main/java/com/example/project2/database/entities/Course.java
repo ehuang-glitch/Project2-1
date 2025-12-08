@@ -11,18 +11,12 @@ public class Course {
 
     private String code;
     private String name;
-    private int percentage;
-    private String assignments;
-    private int userId;
 
     public Course() {}
 
-    public Course(String code, String name, int percentage, String assignments, int userId) {
+    public Course(String code, String name) {
         this.code = code;
         this.name = name;
-        this.percentage = percentage;
-        this.assignments = assignments;
-        this.userId = userId;
     }
 
     // getters/setters
@@ -34,13 +28,4 @@ public class Course {
 
     public String getName() { return name; }
     public void setName(String n) { this.name = n; }
-
-    public int getPercentage() { return percentage; }
-    public void setPercentage(int p) { this.percentage = p; }
-
-    public String getAssignments() { return assignments; }
-    public void setAssignments(String a) { this.assignments = a; }
-
-    public int getUserId() { return userId; }
-    public void setUserId(int u) { this.userId = u; }
 }
